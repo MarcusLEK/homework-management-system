@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Api\ApiController;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -44,5 +45,44 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    /**
+     * Render an exception into an HTTP response.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Throwable  $e
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @throws \Throwable
+     */
+    public function render($request, Throwable $e)
+    {
+        if ($request->is('api*') || $request->is('web*') || $request->expectsJson()) {
+            $controller = new ApiController();
+
+            if ($e instanceof NotFoundHttpException) {
+                return $controller->respondNotFound('This endpoint does not exist');
+            } else if ($e instanceof ModelNotFoundException) {
+                return $controller->respondNotFound('The specified resource cannot be found or is no longer available');
+            } else if ($e instanceof InternalErrorException) {
+                return $controller->respondInternalError();
+            } else if ($e instanceof MethodNotAllowedHttpException) {
+                return $controller->respondMethodNotAllowed();
+            } else if ($e instanceof AuthorizationException || $e instanceof AuthenticationException) {
+                return $controller->respondUnauthorizedError();
+            } else if ($e instanceof ValidationException) {
+                return $controller->respondBadRequestError(implode(" ", $e->validator->errors()->all()));
+            } else if ($e instanceof UnauthorizedException) {
+                return $controller->respondUnauthorizedError();
+            } elseif ($e->getTrace()[0]['class'] == 'Lcobucci\JWT\Signer\Hmac') {
+                //JWT throws a weird error if the key is invalid - no other proper way to check it other than this
+                return $controller->respondUnauthorizedError('Invalid token');
+            } else {
+                $controller->addDebugInfo($this->convertExceptionToArray($e));
+                return $controller->respondInternalError();
+            }
+        }
+        return parent::render($request, $e);
     }
 }
