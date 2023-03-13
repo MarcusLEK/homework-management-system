@@ -11,7 +11,7 @@ git clone https://github.com/MarcusLEK/homework-management-system.git
 ```
 Create a database on your local called `laravel` and connect to it
 
-CD into the code directory and run the following command:
+CD into the code root directory and run the following command:
 
 <b>Note: If you are not using virtual host, please ensure `php artisan serve` is running at all times during development/testing on a seperate terminal</b>
 ```
