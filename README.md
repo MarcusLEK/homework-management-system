@@ -21,3 +21,8 @@ php artisan migrate:fresh
 php artisan db:seed
 php artisan serve
 ```
+
+Optionally, you can run the seeder for the homework with the following command:
+```
+php artisan db:seed --class=HomeworkSeeder
+```
