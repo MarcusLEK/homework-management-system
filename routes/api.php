@@ -17,3 +17,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('students', 'StudentController');
 Route::apiResource('teachers', 'TeacherController');
+Route::apiResource('homeworks', 'HomeworkController');
