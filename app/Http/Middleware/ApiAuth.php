@@ -25,13 +25,12 @@ class ApiAuth
         }
 
         $user = User::where('username', $request->server('PHP_AUTH_USER'))->first();
-        if (!$user) {
+        if (empty($user)) {
             return $apiController->respondNotFound('User not found');
         }
         if (!Hash::check($request->server('PHP_AUTH_PW'), $user->password)) {
-            return $apiController->respondMethodNotAllowed('Username and password does not match');
+            return $apiController->respondMethodNotAllowed('Username and password does not match');        
         }
-
 
         return $next($request);
     }
