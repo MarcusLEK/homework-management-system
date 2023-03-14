@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::resource('students', 'StudentController');
-Route::resource('teachers', 'TeacherController');
+Route::apiResource('students', 'StudentController');
+Route::apiResource('teachers', 'TeacherController');
