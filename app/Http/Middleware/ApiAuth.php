@@ -29,7 +29,7 @@ class ApiAuth
             return $apiController->respondNotFound('User not found');
         }
         if (!Hash::check($request->server('PHP_AUTH_PW'), $user->password)) {
-            return $apiController->respondMethodNotAllowed('Username and email does not match');
+            return $apiController->respondMethodNotAllowed('Username and password does not match');
         }
 
 
