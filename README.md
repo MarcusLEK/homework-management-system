@@ -3,6 +3,8 @@
 This is a homework managment system with only api for the following modules only.
 1. Student
 2. Teacher
+3. Homework
+4. HomeworkAssignment
 
 # Setup
 Clone the repo or download the zip file and extract the code
@@ -22,7 +24,10 @@ php artisan db:seed
 php artisan serve
 ```
 
-Optionally, you can run the seeder for the homework with the following command:
+Optionally, you can run the seeder with the following command:
+
+</b>Note: The homework and homework assignment model is not seeded by default</b>
 ```
 php artisan db:seed --class=HomeworkSeeder
+php artisan db:seed --class=HomeworAssignmentkSeeder
 ```
