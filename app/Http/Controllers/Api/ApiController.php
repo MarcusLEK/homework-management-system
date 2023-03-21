@@ -181,9 +181,6 @@ class ApiController extends BaseController
     public function addDebugInfo($data)
     {
         $this->debugInfo[] = $data;
-//        if (config('app.debug')) {
-//            $this->debugInfo[] = $data;
-//        }
     }
 
     /**
@@ -202,11 +199,11 @@ class ApiController extends BaseController
                 'status_code' => $this->statusCode,
             ]
         ];
-        if (empty($data) && !is_array($data))
+        if (empty($data) && !is_array($data)) {
             $data = array_merge($meta, ['response' => null]);
-        else
+        } else {
             $data = array_merge($meta, ['response' => $data]);
-
+        }
         if (!empty($this->debugInfo)) {
             $data = array_merge($data, ['debug' => $this->debugInfo]);
         }
@@ -221,9 +218,10 @@ class ApiController extends BaseController
      * @param array $items
      * @return LengthAwarePaginator
      */
-    public function paginate(Request $request, $items) {
+    public function paginate(Request $request, $items) 
+    {
         $limit = min(intval($request->get('limit', 10)), self::DEFAULT_MAX_LIMIT);
-        $page = (int)$request->get('page', 1);
+        $page = (int) $request->get('page', 1);
         $offset = ($page-1) * $limit;
         $items = new LengthAwarePaginator(array_slice($items, $offset, $limit), count($items), $limit, $page);
         return $items;
@@ -238,14 +236,14 @@ class ApiController extends BaseController
      * @param array $options
      * @return \Illuminate\Http\JsonResponse
      */
-    public function respondPagination($request, $items, $options=[])
+    public function respondPagination($request, $items)
     {
         if (!($items instanceof LengthAwarePaginator)) {
             $pagination = $this->paginate($request, $items);
         } else {
             $pagination = $items;
         }
-        return $this->respond(['pagination' => $this->getPagination($pagination), 'items' => $pagination->items(), 'options' => $options]);
+        return $this->respond(['pagination' => $this->getPagination($pagination), 'items' => $pagination->items()]);
     }
 
     /**
@@ -254,7 +252,8 @@ class ApiController extends BaseController
      * @param LengthAwarePaginator $item
      * @return array
      */
-    public function getPagination(LengthAwarePaginator $item) {
+    public function getPagination(LengthAwarePaginator $item) 
+    {
         return [
             'total' => $item->total(),
             'current_page' => $item->currentPage(),
@@ -262,20 +261,5 @@ class ApiController extends BaseController
             'from' => $item->firstItem(),
             'to' => $item->lastItem()
         ];
-    }
-
-    public function successJson($message = '', $data = null) {
-        return response()->json([
-            'error' => false,
-            'message' => $message,
-            'data' => $data
-        ]);
-    }
-    public function errorJson($message, $data = null) {
-        return response()->json([
-            'error' => true,
-            'message' => $message,
-            'data' => $data
-        ]);
     }
 }
