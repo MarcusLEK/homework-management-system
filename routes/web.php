@@ -16,3 +16,19 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group([
+
+    'middleware' => 'api',
+    'prefix' => 'api/auth',
+    'namespace' => 'Api'
+
+], function () {
+
+    Route::post('login', 'ApiAuthController@login');
+    Route::post('logout', 'ApiAuthController@logout');
+    Route::post('refresh', 'ApiAuthController@refresh');
+    Route::post('register', 'UserController@store');
+    Route::get('me', 'ApiAuthController@me');
+    Route::post('reset-password', 'ApiAuthController@resetPassword');
+});
