@@ -28,7 +28,6 @@ Route::group([
     Route::post('login', 'ApiAuthController@login');
     Route::post('logout', 'ApiAuthController@logout');
     Route::post('refresh', 'ApiAuthController@refresh');
-    Route::post('register', 'UserController@store');
     Route::get('me', 'ApiAuthController@me');
     Route::post('reset-password', 'ApiAuthController@resetPassword');
 });
