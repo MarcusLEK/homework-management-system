@@ -1,0 +1,554 @@
+{
+	"info": {
+		"_postman_id": "f9684051-d01d-4250-9379-2c82d20de71b",
+		"name": "homework-management-system",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14378841"
+	},
+	"item": [
+		{
+			"name": "Getting Started",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "username",
+									"value": "hemmerich",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/auth/logout",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "homework",
+			"item": [
+				{
+					"name": "get homework",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homeworks",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homeworks"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "set the pagination page",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "set the total students view per pagination",
+									"disabled": true
+								},
+								{
+									"key": "sort_by",
+									"value": "oldest",
+									"description": "sort by 'latest' or 'oldest'\ndefault is oldest",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show homework",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homeworks/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homeworks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create homework",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "homework title",
+									"description": "required, min length 3 chars",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"description": "nullable, min length 3 chars",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homeworks",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homeworks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update homework",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "abc",
+									"description": "required, min length 3 chars",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "abc",
+									"description": "required, min length 3 chars",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"description": "required, min length 3 chars",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homeworks/1?title=homework title&description=description",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homeworks",
+								"1"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": "homework title",
+									"description": "required, min length 3 chars"
+								},
+								{
+									"key": "description",
+									"value": "description",
+									"description": "nullable, min length 3 chars"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete homework",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homeworks/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homeworks",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "homework assignment",
+			"item": [
+				{
+					"name": "get homework assignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homework-assignments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homework-assignments"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"description": "set the pagination page",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "5",
+									"description": "set the total students view per pagination",
+									"disabled": true
+								},
+								{
+									"key": "sort_by",
+									"value": "oldest",
+									"description": "sort by 'latest' or 'oldest'\ndefault is oldest",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show homework assignment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homework-assignments/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homework-assignments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create homework assignment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "homework_id",
+									"value": "1",
+									"description": "required, numeric",
+									"type": "text"
+								},
+								{
+									"key": "student_id",
+									"value": "1",
+									"description": "required, numeric",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homework-assignments",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homework-assignments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update homework assignment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "homework_id",
+									"value": "abc",
+									"description": "required, min length 3 chars",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "",
+									"description": "0 = pending\n1 = completed",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homework-assignments/1?status=description",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homework-assignments",
+								"1"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "description",
+									"description": "nullable, min length 3 chars"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete homework assignment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8000/api/homework-assignments/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"homework-assignments",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE2Nzk0MDg0MTgsIm5iZiI6MTY3OTQwODQxOCwianRpIjoiNHBJM0dFaDlRbGs1cEhHbCIsInN1YiI6IjMxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.DKZ7ovSJNLnr6NWwXEY7db-S1WSirMk9EUMtX7HqTTI",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

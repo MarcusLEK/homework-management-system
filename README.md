@@ -34,7 +34,8 @@ php artisan db:seed --class=HomeworkAssignmentSeeder
 
 # Postman
 1. make sure the server is up and running before you test with postman
-2. login with either the student or teacher account and replace the bearer token in the collection Auth tab.
+2. in the root folder of this project, there is a postman collection json file which you can import into your postman.
+3. login with either the student or teacher account and replace the bearer token in the collection Auth tab.
 
 <b>Note: the data shown in the image may differ from the db due to the seed. Password for all accounts is <u>123</u></b>
 
