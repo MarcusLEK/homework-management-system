@@ -31,3 +31,6 @@ Optionally, you can run the seeder with the following command:
 php artisan db:seed --class=HomeworkSeeder
 php artisan db:seed --class=HomeworAssignmentkSeeder
 ```
+
+## Known Issues
+1. No policy is implemented, therefore any teachers can update/delete other teacher homework and homework assignment.
