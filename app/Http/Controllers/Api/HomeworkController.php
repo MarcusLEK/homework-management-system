@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Homework;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -18,6 +19,9 @@ class HomeworkController extends ApiController
         $limit = min(intval($request->get('limit', 10)), 1000);
 
         $homeworks = Homework::query();
+        if (!empty(Auth::user()->teacher)) {
+            $homeworks = $homeworks->where('teacher_id', Auth::user()->teacher->id);
+        }
 
         $sortBy = $request->input('sort_by', 'latest');
         if ($sortBy === 'latest') {
@@ -37,7 +41,6 @@ class HomeworkController extends ApiController
         $input = $request->input();
 
         $validator = Validator::make($input, [
-            'teacher_id' => 'required|exists:teachers,id',
             'title' => 'required|min:3',
             'description' => 'nullable|min:3'
         ]);
@@ -48,7 +51,7 @@ class HomeworkController extends ApiController
 
         try {
             
-            $homework = Homework::create($input);
+            $homework = Homework::create($input + ['teacher_id' => Auth::user()->teacher->id]);
 
             return $this->respondCreated($homework);
 
@@ -74,7 +77,6 @@ class HomeworkController extends ApiController
         $input = $request->input();
 
         $validator = Validator::make($input, [
-            'teacher_id' => 'required|exists:teachers,id',
             'title' => 'required|min:3',
             'description' => 'nullable|min:3'
         ]);
