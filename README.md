@@ -32,5 +32,17 @@ php artisan db:seed --class=HomeworkSeeder
 php artisan db:seed --class=HomeworkAssignmentSeeder
 ```
 
+# Postman
+1. make sure the server is up and running before you test with postman
+2. login with either the student or teacher account and replace the bearer token in the collection Auth tab.
+
+<b>Note: the data shown in the image may differ from the db due to the seed. Password for all accounts is <u>123</u></b>
+
+<img src="images/Screenshot_20230321_224120.png"> 
+
+<img src="images/Screenshot_20230321_223641.png"> 
+
+<img src="images/Screenshot_20230321_223946.png"> 
+
 ## Known Issues
 1. No policy is implemented, therefore any teachers can update/delete other teacher homework and homework assignment.
