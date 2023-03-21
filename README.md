@@ -29,7 +29,7 @@ Optionally, you can run the seeder with the following command:
 </b>Note: The homework and homework assignment model is not seeded by default</b>
 ```
 php artisan db:seed --class=HomeworkSeeder
-php artisan db:seed --class=HomeworAssignmentkSeeder
+php artisan db:seed --class=HomeworkAssignmentSeeder
 ```
 
 ## Known Issues
